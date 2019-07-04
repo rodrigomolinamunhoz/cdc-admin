@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
 import './css/pure-min.css';
 import './css/side-menu.css';
+import $ from 'jquery';
 
 class App extends Component {
 
     constructor() {
         super();
-        this.state = { lista: [{nome:'Rodrigo Molina', email:'rodrigo@gmail.com', senha:'123456'}] };
+        this.state = { lista: [] };
+    }
+
+    componentDidMount() {
+        $.ajax({
+            url: "http://5d1e76083374890014f00d8c.mockapi.io/autores",
+            dataType: 'json',
+            success: function(resposta) {
+                this.setState({ lista: resposta });
+            }.bind(this)
+        });
     }
 
   render() {
