@@ -34,8 +34,8 @@ class App extends Component {
             type: 'POST',
             data: JSON.stringify({nome:this.state.nome, email:this.state.email, senha:this.state.senha}),
             success: function(resposta) {
-                console.log('sucesso');
-            }, 
+                this.setState({lista: [...this.state.lista, resposta]});
+            }.bind(this), 
             error: function(resposta) {
                 console.log('erro');
             }
