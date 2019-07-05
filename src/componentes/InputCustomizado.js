@@ -19,15 +19,15 @@ class InputCustomizado extends Component {
     }
 
     componentDidMount() {
-        PubSub.subscribe('erro-validacao-formulario', function(topico, erro){
-            if (erro.field == this.props.name) {
-                this.setState({msgErro: erro.defaultMessage})    
+        PubSub.subscribe('erro-validacao-formulario', function(topico, erro) {
+            if (erro.field === this.props.name) {
+                this.setState({msgErro: erro.defaultMessage});
             }
-        }).bind(this);
+        }.bind(this));
 
-        PubSub.subscribe('limpa-erros', function(topico){
+        PubSub.subscribe('limpa-erros', function(topico) {
             this.setState({msgErro: ''});
-        }).bind(this);
+        }.bind(this));
     }
 }
 
