@@ -20,7 +20,13 @@ class InputCustomizado extends Component {
 
     componentDidMount() {
         PubSub.subscribe('erro-validacao-formulario', function(topico, erro){
-            this.setState({msgErro: erro.defaultMessage})
+            if (erro.field == this.props.name) {
+                this.setState({msgErro: erro.defaultMessage})    
+            }
+        }).bind(this);
+
+        PubSub.subscribe('limpa-erros', function(topico){
+            this.setState({msgErro: ''});
         }).bind(this);
     }
 }

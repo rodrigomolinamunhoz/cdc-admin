@@ -27,11 +27,15 @@ class FormularioAutor extends Component {
             data: JSON.stringify({nome:this.state.nome, email:this.state.email, senha:this.state.senha}),
             success: function(resposta) {
                 PubSub.publish('atualiza-listagem-autores', resposta);
+                this.setState({nome:'', email:'', senha:''})
             }, 
             error: function(resposta) {
                 if (resposta.status === 400) {
                     new TratadorErros().publicaErros(resposta.responseJSON);
                 }
+            },
+            beforeSend: function() {
+                PubSub.publish('limpa-erros', {});
             }
         });
     }
