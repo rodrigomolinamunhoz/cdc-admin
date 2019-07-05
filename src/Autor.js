@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import InputCustomizado from './componentes/InputCustomizado';
 
-export class FormularioAutor extends Component {
+class FormularioAutor extends Component {
 
     constructor() {
         super();
@@ -24,7 +24,7 @@ export class FormularioAutor extends Component {
             type: 'POST',
             data: JSON.stringify({nome:this.state.nome, email:this.state.email, senha:this.state.senha}),
             success: function(resposta) {
-                this.setState({lista: [...this.state.lista, resposta]});
+                this.props.callBackAtualizaMensagem([...this.state.lista, resposta]);
             }.bind(this), 
             error: function(resposta) {
                 console.log('erro');
@@ -61,23 +61,8 @@ export class FormularioAutor extends Component {
     }
 }
 
-export class TabelaAutores extends Component {
+class TabelaAutores extends Component {
 
-    constructor() {
-        super();
-        this.state = { lista: [] };
-    }
-
-    componentDidMount() {
-        $.ajax({
-            url: "http://5d1e76083374890014f00d8c.mockapi.io/autores",
-            dataType: 'json',
-            success: function(resposta) {
-                this.setState({ lista: resposta });
-            }.bind(this)
-        });
-    }
-    
     render() {
         return (
             <div>            
@@ -90,7 +75,7 @@ export class TabelaAutores extends Component {
                 </thead>
                 <tbody>
                   {
-                      this.state.lista.map(function(autor){
+                      this.props.lista.map(function(autor){
                           return (
                               <tr key={autor.id}>
                                   <td>{autor.nome}</td>
@@ -102,6 +87,38 @@ export class TabelaAutores extends Component {
                 </tbody>
               </table> 
             </div>  
+        );
+    }
+}
+
+export default class AutorBox extends Component {
+
+    constructor() {
+        super();
+        this.state = { lista: [] };
+        this.atualizaListagem = this.atualizaListagem.bind(this);
+    }
+
+    componentDidMount() {
+        $.ajax({
+            url: "http://5d1e76083374890014f00d8c.mockapi.io/autores",
+            dataType: 'json',
+            success: function(resposta) {
+                this.setState({ lista: resposta });
+            }.bind(this)
+        });
+    }
+
+    atualizaListagem(novaLista) {
+        this.setState({ lista: novaLista })
+    }
+
+    render() {
+        return (
+            <div>
+                <FormularioAutor callBackAtualizaMensagem={this.atualizaListagem} />
+                <TabelaAutores lista={this.state.lista} />
+            </div>
         );
     }
 }
