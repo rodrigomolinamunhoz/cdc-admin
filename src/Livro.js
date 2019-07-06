@@ -28,9 +28,8 @@ class FormularioLivro extends Component {
             data: JSON.stringify({titulo:this.state.titulo, preco:this.state.preco, autorId:this.state.autorId}),
             success: function(resposta) {
                 PubSub.publish('atualiza-listagem-livros', resposta);
-                //console.log(this.state); 
-                //this.setState({titulo:'', preco:'', autorId:'', autor:{} })
-            }, 
+                this.setState({titulo:'', preco:'', autorId:'', autor:{} })
+            }.bind(this), 
             error: function(resposta) {
                 if (resposta.status === 400) {
                     new TratadorErros().publicaErros(resposta.responseJSON);
