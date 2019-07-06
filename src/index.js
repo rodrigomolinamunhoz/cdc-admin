@@ -1,16 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import './index.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import App from './App';
 import AutorBox from './Autor';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Home from './Home';
+
+const routes = (
+  <App>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route path="/autor" component={AutorBox} />
+      <Route path="/livros" />
+    </Switch>
+  </App>
+);
 
 ReactDOM.render(
-<BrowserRouter>
-    <Switch>
-        <Route exact path="/" component={App} />
-        <Route path="/autor" component={AutorBox} />
-        <Route path="/livro" />
-    </Switch>
-</BrowserRouter>,
-document.getElementById('root'));
+  (
+    <Router>
+      {routes}
+    </Router>
+  ),
+  document.getElementById('root')
+);

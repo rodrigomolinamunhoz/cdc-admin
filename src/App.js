@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './css/pure-min.css';
 import './css/side-menu.css';
-import AutorBox from './Autor';
 import { Link } from 'react-router-dom';
 
 class App extends Component {
@@ -23,11 +22,7 @@ class App extends Component {
             </div>
           </div>
           <div id="main">
-            <div className="header">
-              <h1>Bem vindo ao sistema</h1>
-            </div>
-            <div className="content" id="content">
-            </div>
+            {this.props.children}
           </div>            
         </div>     
       );
