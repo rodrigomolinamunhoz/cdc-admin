@@ -21,7 +21,7 @@ class FormularioLivro extends Component {
         evento.preventDefault();
 
         $.ajax({
-            url: "http://5d1e76083374890014f00d8c.mockapi.io/livros",
+            url: "https://5d1e76083374890014f00d8c.mockapi.io/livros",
             contentType: 'application/json',
             dataType: 'json',
             type: 'POST',
@@ -125,7 +125,7 @@ export default class LivroBox extends Component {
 
     componentDidMount() {
         $.ajax({
-            url: "http://5d1e76083374890014f00d8c.mockapi.io/livros",
+            url: "https://5d1e76083374890014f00d8c.mockapi.io/livros",
             dataType: 'json',
             success: function(resposta) {
                 this.setState({ lista: resposta });
@@ -133,7 +133,7 @@ export default class LivroBox extends Component {
         });
 
         $.ajax({
-            url: "http://5d1e76083374890014f00d8c.mockapi.io/autores",
+            url: "https://5d1e76083374890014f00d8c.mockapi.io/autores",
             dataType: 'json',
             success: function(resposta) {
                 this.setState({ autores: resposta });

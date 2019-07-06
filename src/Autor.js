@@ -16,7 +16,7 @@ class FormularioAutor extends Component {
         evento.preventDefault();
 
         $.ajax({
-            url: "http://5d1e76083374890014f00d8c.mockapi.io/autores",
+            url: "https://5d1e76083374890014f00d8c.mockapi.io/autores",
             contentType: 'application/json',
             dataType: 'json',
             type: 'POST',
@@ -98,7 +98,7 @@ export default class AutorBox extends Component {
 
     componentDidMount() {
         $.ajax({
-            url: "http://5d1e76083374890014f00d8c.mockapi.io/autores",
+            url: "https://5d1e76083374890014f00d8c.mockapi.io/autores",
             dataType: 'json',
             success: function(resposta) {
                 this.setState({ lista: resposta });
